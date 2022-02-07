@@ -6,17 +6,25 @@ import Filters from '../../screens/Filters';
 import {Icon} from 'react-native-elements/dist/icons/Icon';
 import {Colors} from '../../constants';
 import {useNavigation} from '@react-navigation/core';
+import {IFighter} from '../../proptypes/fighter.types';
+import type {RouteProp} from '@react-navigation/native';
 
 type MainStackParamList = {
   Filters: undefined;
   Fighters: undefined;
-  Details: undefined;
+  Details: {details: IFighter};
 };
+
+export type DetailsScreenRouteProp = RouteProp<MainStackParamList, 'Details'>;
+export type DetailsScreenNavigationProp = RouteProp<
+  MainStackParamList,
+  'Details'
+>;
 
 const Stack = createNativeStackNavigator<MainStackParamList>();
 
 const MainStack = () => {
-  const {navigate} = useNavigation();
+  const {navigate} = useNavigation<any>();
 
   const onFilters = () => navigate('Filters');
 
@@ -43,7 +51,14 @@ const MainStack = () => {
 };
 
 const FilterButton: FC<any> = props => {
-  return <Icon name="filter" color={Colors.WHITE} {...props} />;
+  return (
+    <Icon
+      name="md-filter-sharp"
+      type="ionicon"
+      color={Colors.WHITE}
+      {...props}
+    />
+  );
 };
 
 export default MainStack;
