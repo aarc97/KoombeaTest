@@ -19,5 +19,5 @@ export default Fighters;
 const Container = styled.View`
   flex: 1;
   background-color: ${Colors.WHITE};
-  margin-top: ${Spacing.SCALE_24}px;
+  padding-top: ${Spacing.SCALE_24}px;
 `;
