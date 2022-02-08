@@ -11,8 +11,10 @@
 import React from 'react';
 import {StatusBar} from 'react-native';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
+// import Config from 'react-native-config';
 
 import AppNavigator from './src/navigations';
+// import StorybookUIRoot from './storybook';
 
 import {
   ThemeProvider,
