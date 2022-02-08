@@ -11,32 +11,17 @@
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
-		1435C1DEA996405794FFE8EF /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 16C3FE2D45664376B16C215E /* EvilIcons.ttf */; };
 		16E0F3F7E8E24CA799FA49F5 /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FA3B56C4228144C78FB8272E /* Roboto-Regular.ttf */; };
-		26C66212233E4B4196243912 /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BBA4F4006C9E4EA98719EB61 /* FontAwesome.ttf */; };
-		2B519B50BA2F48138B2197D9 /* FontAwesome5_Brands.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8115525669B649FD86B14562 /* FontAwesome5_Brands.ttf */; };
-		355F3C6F4F1B4FCBBD00674A /* FontAwesome5_Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 143242C11B254120AE9F2589 /* FontAwesome5_Regular.ttf */; };
+		1F978E0D27B2CAEF00EE5A1A /* BootSplash.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1F978E0C27B2CAEE00EE5A1A /* BootSplash.storyboard */; };
 		453E2210FF9A4373B5938FFE /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1C035C315ECD4480B754BAEB /* Roboto-Medium.ttf */; };
 		4F03ED34FBB6465DBD1E6166 /* Roboto-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D2ED35EC545046D084B57ADF /* Roboto-Black.ttf */; };
-		544CB0CCD07F4DD0B066A8F2 /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F502234715C4424EADADC7D5 /* Octicons.ttf */; };
-		5A4909D292924A54B18292D2 /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 45BB7982A13344DCBBE0CE83 /* Entypo.ttf */; };
 		60E0A0E3CCA54D929CFD6543 /* Roboto-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BD7AC0CDFDF543168BF4039A /* Roboto-Italic.ttf */; };
 		6172F2D35A4C3AA820D92908 /* libPods-KoombeaTest.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6423831EA8574132BED9D8CC /* libPods-KoombeaTest.a */; };
-		675B1904BECC42B385A08145 /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2AFB911CA7FD4AEF99FD35EC /* Zocial.ttf */; };
 		7338F2AC71BB440AB014DBC0 /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 389678B96E5E4D9BA092B6BF /* Roboto-Bold.ttf */; };
 		7EF68E3733C33B6898317E18 /* libPods-KoombeaTest-KoombeaTestTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ABFE59519B596E51CEFDCCC0 /* libPods-KoombeaTest-KoombeaTestTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		9F59C86E840A420190862D34 /* Roboto-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 67EB423651704823BCBA5165 /* Roboto-BoldItalic.ttf */; };
-		AAE10244E1344C0F894EC303 /* AntDesign.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F03939981BE24593B98D68C0 /* AntDesign.ttf */; };
-		ABCE410648A340499ECE0660 /* MaterialCommunityIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3B239AD78F6E4E18B783522B /* MaterialCommunityIcons.ttf */; };
 		B3A96AFB418D48F5AEFC9129 /* Roboto-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C1897327518541CA9F9A31CC /* Roboto-BlackItalic.ttf */; };
-		B50BE21EDCB440EFA2197F2C /* FontAwesome5_Solid.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B038A0EA762F48C8B7EDD174 /* FontAwesome5_Solid.ttf */; };
-		CE97A790B1004DBE96829E89 /* Feather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2E83B78EBE3C4F4BB4CE7C51 /* Feather.ttf */; };
-		D6197CCF2186430F99DA3738 /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 546E1FB960CE47F387F9EEE2 /* MaterialIcons.ttf */; };
-		E559D7ADD3964790879D271B /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 247AF77DBB954047897E50FC /* Foundation.ttf */; };
-		F816997F31EE451080AFF051 /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 260012CA52C94E10A6D097C0 /* SimpleLineIcons.ttf */; };
-		F97E1F0862EE4048B269CF6C /* Fontisto.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F6DC753129DA4308841509E2 /* Fontisto.ttf */; };
-		F98B556FF313433C8033B19F /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0C5555B4B3F441A1A2129DC2 /* Ionicons.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,6 +49,7 @@
 		16C3FE2D45664376B16C215E /* EvilIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = EvilIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf"; sourceTree = "<group>"; };
 		1C035C315ECD4480B754BAEB /* Roboto-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-Medium.ttf"; path = "../assets/fonts/Roboto-Medium.ttf"; sourceTree = "<group>"; };
 		1D0AE47A65C8663E3B452821 /* Pods-KoombeaTest-KoombeaTestTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KoombeaTest-KoombeaTestTests.release.xcconfig"; path = "Target Support Files/Pods-KoombeaTest-KoombeaTestTests/Pods-KoombeaTest-KoombeaTestTests.release.xcconfig"; sourceTree = "<group>"; };
+		1F978E0C27B2CAEE00EE5A1A /* BootSplash.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = BootSplash.storyboard; path = KoombeaTest/BootSplash.storyboard; sourceTree = "<group>"; };
 		247AF77DBB954047897E50FC /* Foundation.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Foundation.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Foundation.ttf"; sourceTree = "<group>"; };
 		260012CA52C94E10A6D097C0 /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = SimpleLineIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; };
 		2AFB911CA7FD4AEF99FD35EC /* Zocial.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Zocial.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Zocial.ttf"; sourceTree = "<group>"; };
@@ -132,6 +118,7 @@
 		13B07FAE1A68108700A75B9A /* KoombeaTest */ = {
 			isa = PBXGroup;
 			children = (
+				1F978E0C27B2CAEE00EE5A1A /* BootSplash.storyboard */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
@@ -236,8 +223,8 @@
 				00E356EA1AD99517003FC87E /* Sources */,
 				00E356EB1AD99517003FC87E /* Frameworks */,
 				00E356EC1AD99517003FC87E /* Resources */,
-				077E01280D4B4AD18B2E1770 /* [CP] Embed Pods Frameworks */,
 				4E62BDF20514810D028A5FBF /* [CP] Copy Pods Resources */,
+				F8C7C070583AC6E7E288F76C /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -259,8 +246,8 @@
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
-				C8AC78B0264D0F9F6F6D630E /* [CP] Embed Pods Frameworks */,
 				ADC9DDC32298B72B3CF5DC8E /* [CP] Copy Pods Resources */,
+				453759631E79F064C2F2C990 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -328,22 +315,7 @@
 				60E0A0E3CCA54D929CFD6543 /* Roboto-Italic.ttf in Resources */,
 				453E2210FF9A4373B5938FFE /* Roboto-Medium.ttf in Resources */,
 				16E0F3F7E8E24CA799FA49F5 /* Roboto-Regular.ttf in Resources */,
-				AAE10244E1344C0F894EC303 /* AntDesign.ttf in Resources */,
-				5A4909D292924A54B18292D2 /* Entypo.ttf in Resources */,
-				1435C1DEA996405794FFE8EF /* EvilIcons.ttf in Resources */,
-				CE97A790B1004DBE96829E89 /* Feather.ttf in Resources */,
-				26C66212233E4B4196243912 /* FontAwesome.ttf in Resources */,
-				2B519B50BA2F48138B2197D9 /* FontAwesome5_Brands.ttf in Resources */,
-				355F3C6F4F1B4FCBBD00674A /* FontAwesome5_Regular.ttf in Resources */,
-				B50BE21EDCB440EFA2197F2C /* FontAwesome5_Solid.ttf in Resources */,
-				F97E1F0862EE4048B269CF6C /* Fontisto.ttf in Resources */,
-				E559D7ADD3964790879D271B /* Foundation.ttf in Resources */,
-				F98B556FF313433C8033B19F /* Ionicons.ttf in Resources */,
-				ABCE410648A340499ECE0660 /* MaterialCommunityIcons.ttf in Resources */,
-				D6197CCF2186430F99DA3738 /* MaterialIcons.ttf in Resources */,
-				544CB0CCD07F4DD0B066A8F2 /* Octicons.ttf in Resources */,
-				F816997F31EE451080AFF051 /* SimpleLineIcons.ttf in Resources */,
-				675B1904BECC42B385A08145 /* Zocial.ttf in Resources */,
+				1F978E0D27B2CAEF00EE5A1A /* BootSplash.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -363,23 +335,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "set -e\n\nexport NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh\n";
-		};
-		077E01280D4B4AD18B2E1770 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-KoombeaTest-KoombeaTestTests/Pods-KoombeaTest-KoombeaTestTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-KoombeaTest-KoombeaTestTests/Pods-KoombeaTest-KoombeaTestTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-KoombeaTest-KoombeaTestTests/Pods-KoombeaTest-KoombeaTestTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
 		};
 		3E482C27206C4DEF2FE45063 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -401,6 +356,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		453759631E79F064C2F2C990 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-KoombeaTest/Pods-KoombeaTest-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-KoombeaTest/Pods-KoombeaTest-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-KoombeaTest/Pods-KoombeaTest-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		4E62BDF20514810D028A5FBF /* [CP] Copy Pods Resources */ = {
@@ -459,21 +431,21 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-KoombeaTest/Pods-KoombeaTest-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		C8AC78B0264D0F9F6F6D630E /* [CP] Embed Pods Frameworks */ = {
+		F8C7C070583AC6E7E288F76C /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-KoombeaTest/Pods-KoombeaTest-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-KoombeaTest-KoombeaTestTests/Pods-KoombeaTest-KoombeaTestTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-KoombeaTest/Pods-KoombeaTest-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-KoombeaTest-KoombeaTestTests/Pods-KoombeaTest-KoombeaTestTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-KoombeaTest/Pods-KoombeaTest-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-KoombeaTest-KoombeaTestTests/Pods-KoombeaTest-KoombeaTestTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		FD10A7F022414F080027D42C /* Start Packager */ = {
