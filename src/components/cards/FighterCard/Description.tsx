@@ -7,9 +7,8 @@ import styled from 'styled-components/native';
 import {Colors, Spacing} from '../../../constants';
 import {NumberFormat} from '../../formats';
 
-interface MoneyFormatProps {
+interface NumberFormatProps {
   value: string | number;
-  isWithdrawl?: boolean;
   prefix?: string;
 }
 
@@ -17,12 +16,14 @@ interface IDescription {
   label: string;
   description: string | number;
   isPrice?: boolean;
+  isNumeric?: boolean;
 }
 
 const Description: FC<IDescription> = ({
   label = '',
   description = '',
   isPrice,
+  isNumeric,
 }) => {
   const descriptionText = capitalize(label);
   return (
@@ -30,6 +31,8 @@ const Description: FC<IDescription> = ({
       <DescriptionText>{descriptionText}:</DescriptionText>
       {isPrice ? (
         <Price value={description} prefix="$" />
+      ) : isNumeric ? (
+        <Quantity value={description} />
       ) : (
         <Text>{description}</Text>
       )}
@@ -37,7 +40,13 @@ const Description: FC<IDescription> = ({
   );
 };
 
-const Price: FC<MoneyFormatProps> = memo(({value = '0', ...rest}) => {
+const Quantity: FC<NumberFormatProps> = memo(({value = '0', ...rest}) => {
+  return (
+    <NumberFormat value={value} RenderComponent={QuantityValue} {...rest} />
+  );
+});
+
+const Price: FC<NumberFormatProps> = memo(({value = '0', ...rest}) => {
   return <NumberFormat value={value} RenderComponent={PriceText} {...rest} />;
 });
 
@@ -47,6 +56,9 @@ const Container = styled.View`
 
 const PriceText = styled(Text)`
   color: ${Colors.SUCCESS};
+`;
+const QuantityValue = styled(Text)`
+  color: ${Colors.BLACK};
 `;
 
 const DescriptionText = styled(Text)<{price?: boolean}>`

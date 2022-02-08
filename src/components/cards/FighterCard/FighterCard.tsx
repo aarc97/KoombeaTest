@@ -34,7 +34,7 @@ const FighterCard: FC<IFighterCard> = ({item, onPress, ...rest}) => {
       <Right>
         <Description isPrice label="Price" description={price} />
         <Description label="Rate" description={rate} />
-        <Description label="Downloads" description={downloads} />
+        <Description isNumeric label="Downloads" description={downloads} />
       </Right>
     </Card>
   );
