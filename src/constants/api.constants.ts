@@ -4,3 +4,5 @@ export const UNIVERSES_KEY = 'universes';
 
 export const UNIVERSE_API = `${API_URL}${UNIVERSES_KEY}`;
 export const FIGHTERS_API = `${API_URL}${FIGHTERS_KEY}`;
+
+export const IS_FIRST_TIME = '@is_first_time';

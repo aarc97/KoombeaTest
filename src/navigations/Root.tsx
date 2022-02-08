@@ -5,11 +5,12 @@ import {Routes} from '../constants';
 import {MainStack} from './stacks';
 
 import Onboarding from '../screens/Onboarding';
+import useOnboarding from '../hooks/useOnboarding';
 
 const RootStack = createNativeStackNavigator();
 
 const RootStackScreen = () => {
-  const isFirstTime = false;
+  const {isFirstTime} = useOnboarding();
 
   return (
     <>

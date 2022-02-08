@@ -1,10 +1,10 @@
-import {useNavigation} from '@react-navigation/core';
 import React, {FC} from 'react';
 import {Image, TouchableOpacity} from 'react-native';
 import {Icon} from 'react-native-elements';
 
 import Walkthrough from 'react-native-onboarding-swiper';
 import {Colors, Spacing} from '../../constants';
+import useOnboarding from '../../hooks/useOnboarding';
 
 const DoneButton: FC = props => {
   return (
@@ -22,13 +22,13 @@ const DoneButton: FC = props => {
 };
 
 const Onboarding: FC = () => {
-  const {navigate} = useNavigation();
+  const {setItem} = useOnboarding();
   return (
     <>
       <Walkthrough
         bottomBarColor={Colors.PRIMARY}
         DoneButtonComponent={DoneButton}
-        onDone={() => navigate('Fighters')}
+        onDone={() => setItem(false)}
         pages={[
           {
             backgroundColor: Colors.PRIMARY,
