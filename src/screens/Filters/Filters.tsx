@@ -16,12 +16,7 @@ import {Colors, Spacing, Typography} from '../../constants';
 import useStore, {initialSortValues} from '../../store';
 import {useNavigation} from '@react-navigation/core';
 import {handleCheckOnSortValues} from '../../utils/fighters.utils';
-
-interface IRadioGroupValues {
-  key: string;
-  name: string;
-  value: string;
-}
+import {IRadioGroupValues} from '../../proptypes/forms.types';
 
 const Filters: FC = () => {
   const [isLoading, setIsloading] = useState(false);
@@ -74,7 +69,7 @@ const Filters: FC = () => {
     Alert.alert('Alert dialog', 'Are you sure you want to reset the filter', [
       {
         text: 'No',
-        onPress: () => console.log('Cancel Pressed'),
+        onPress: () => '',
         style: 'cancel',
       },
       {text: 'Reset', onPress: () => resetForm()},

@@ -2,7 +2,6 @@ import React, {FC} from 'react';
 import {Image} from 'react-native';
 
 import Walkthrough from 'react-native-onboarding-swiper';
-import DoneButton from '../../components/buttons/DoneButton/DoneButton';
 import {Colors} from '../../constants';
 import useOnboarding from '../../hooks/useOnboarding';
 import useStore from '../../store';
@@ -20,7 +19,6 @@ const Onboarding: FC = () => {
     <>
       <Walkthrough
         bottomBarColor={Colors.PRIMARY}
-        DoneButtonComponent={DoneButton}
         onDone={UpdateFirstTime}
         pages={[
           {

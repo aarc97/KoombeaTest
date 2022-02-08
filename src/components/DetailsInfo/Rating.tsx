@@ -4,6 +4,7 @@ import styled from 'styled-components/native';
 import {AirbnbRating, Text} from 'react-native-elements';
 
 import {Colors, Spacing} from '../../constants';
+import {NumberFormat} from '../formats';
 
 interface IRating {
   downloads: string;
@@ -20,7 +21,10 @@ const Rating: FC<IRating> = ({downloads, rate}) => {
         defaultRating={rate}
         size={Spacing.SCALE_24}
       />
-      <RatingLabel>Downloads: {downloads}</RatingLabel>
+
+      <RatingLabel>
+        Downloads: <NumberFormat value={downloads} />
+      </RatingLabel>
     </RatingContainer>
   );
 };
