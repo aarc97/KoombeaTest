@@ -1,5 +1,4 @@
 import React, {FC} from 'react';
-import {Alert} from 'react-native';
 import styled from 'styled-components/native';
 import {Spacing} from '../../../constants';
 import ButtonAction from './ButtonAction';
@@ -7,14 +6,12 @@ import ButtonAction from './ButtonAction';
 const Reset = ButtonAction;
 const Apply = ButtonAction;
 
-const FilterActions: FC = () => {
-  const onReset = () => {
-    Alert.alert('reset');
-  };
-  const onApply = () => {
-    Alert.alert('apply');
-  };
+interface IFilterActions {
+  onReset: () => void;
+  onApply: () => void;
+}
 
+const FilterActions: FC<IFilterActions> = ({onReset, onApply}) => {
   return (
     <Footer>
       <Reset title="Reset" onPress={onReset} />

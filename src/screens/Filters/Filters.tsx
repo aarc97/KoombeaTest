@@ -1,13 +1,27 @@
-import React, {FC, memo, useState} from 'react';
-import {Text, StyleSheet} from 'react-native';
+import React, {FC, memo, useState, useEffect} from 'react';
+import {
+  Text,
+  StyleSheet,
+  ViewStyle,
+  ActivityIndicator,
+  Alert,
+} from 'react-native';
 import {AirbnbRating} from 'react-native-elements';
 import styled from 'styled-components/native';
+import {useFormik} from 'formik';
 
 import FilterActions from '../../components/filters/FilterActions/FilterActions';
 import RadioGroup from '../../components/forms/RadioGroup';
 import {Colors, Spacing, Typography} from '../../constants';
+import useStore from '../../store';
 
-const values = [
+interface IRadioGroupValues {
+  key: string;
+  name: string;
+  value: string;
+}
+
+const radioGroupValues: IRadioGroupValues[] = [
   {key: 'name', name: 'Name', value: 'name'},
   {key: 'price', name: 'Price', value: 'price'},
   {key: 'rate', name: 'Rate', value: 'rate'},
@@ -15,38 +29,72 @@ const values = [
 ];
 
 const Filters: FC = () => {
-  const [count, setCount] = useState(0);
+  const [isLoading, setIsloading] = useState(false);
+  const handleFilter = useStore(state => state.handleFilter);
+  const {rate, sortBy} = useStore(state => state.filter);
 
-  const onSort = (item: any, i: number) => {
-    console.log('onsort ==>', item);
-    console.log('onsort i ==>', i);
+  const {values, handleSubmit, setFieldValue, isSubmitting, resetForm} =
+    useFormik({
+      initialValues: {
+        rate: 0,
+        initialRadioIndex: 0,
+        sortBy: 'name',
+        radioGroupValues,
+      },
+      onSubmit: items => {
+        isSubmitting && setIsloading(true);
+        handleFilter(items);
+
+        setTimeout(() => setIsloading(false), 1000);
+      },
+    });
+
+  useEffect(() => {
+    setFieldValue('rate', rate);
+    setFieldValue('sortBy', sortBy);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [rate, sortBy]);
+
+  const onSort = (item: IRadioGroupValues) => {
+    setFieldValue('sortBy', item.value);
   };
 
   const onFinishRating = (pCount: number) => {
-    if (pCount === count) {
+    if (pCount === values.rate) {
       return null;
     }
+    setFieldValue('rate', pCount);
+  };
 
-    setCount(pCount);
+  const onReset = () => {
+    Alert.alert('Alert dialog', 'Are you sure you want to reset the filter', [
+      {
+        text: 'No',
+        onPress: () => console.log('Cancel Pressed'),
+        style: 'cancel',
+      },
+      {text: 'Reset', onPress: () => resetForm()},
+    ]);
   };
 
   return (
     <Container>
       <Main>
         <Group header="Sort by">
-          <RadioGroup values={values} onPress={onSort} />
+          <RadioGroup values={values.radioGroupValues} onPress={onSort} />
         </Group>
         <Group header="Filter" style={styles.rating}>
           <AirbnbRating
             showRating={false}
             count={5}
-            defaultRating={0}
+            defaultRating={values.rate}
             onFinishRating={onFinishRating}
           />
         </Group>
       </Main>
+      {isLoading ? <ActivityIndicator size="large" /> : null}
 
-      <FilterActions />
+      <FilterActions onApply={handleSubmit} onReset={onReset} />
     </Container>
   );
 };
@@ -56,11 +104,12 @@ export default Filters;
 interface IGroup {
   children: React.ReactNode;
   header: string;
+  style?: ViewStyle;
 }
 
-const Group: FC<IGroup> = memo(({children, header = '', ...rest}) => {
+const Group: FC<IGroup> = memo(({children, header = '', style, ...rest}) => {
   return (
-    <GroupContainer {...rest}>
+    <GroupContainer style={style} {...rest}>
       <Header>{header}</Header>
       {children}
     </GroupContainer>

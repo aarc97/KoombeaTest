@@ -1,10 +1,21 @@
 import {map} from 'lodash';
-import React, {useCallback, useState, ComponentType, FC} from 'react';
+import React, {
+  useCallback,
+  useState,
+  ComponentType,
+  FC,
+  Dispatch,
+  SetStateAction,
+} from 'react';
 import {ScrollView} from 'react-native';
 
 interface ISelectionGroup {
   values: any[];
-  onPress: (item: any, i: number) => void;
+  onPress: (
+    item: any,
+    i: number,
+    setIndex: Dispatch<SetStateAction<number>>,
+  ) => void;
   CustomComponent: ComponentType<any>;
   horizontal?: boolean;
 }
@@ -21,7 +32,7 @@ const SelectionGroup: FC<ISelectionGroup> = ({
     (item: any, idx: number) => {
       const isSelected = currentSelectedIndex === idx;
       const onPressed = () => {
-        onPress(item, idx);
+        onPress(item, idx, setCurrentSelectedItem);
         setCurrentSelectedItem(idx);
       };
 
