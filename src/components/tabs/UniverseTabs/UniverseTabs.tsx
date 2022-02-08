@@ -4,15 +4,16 @@ import {Text} from 'react-native-elements';
 
 import {Spacing} from '../../../constants';
 import useUniverse from '../../../hooks/useUniverse';
-// import {universesData} from '../../../store/fake/data';
+import useStore from '../../../store';
 import SelectionGroup from '../../forms/SelectionGroup';
 import Tab from './Tab';
 
 const UniverseTabs: FC = () => {
   const {data, isLoading, error} = useUniverse();
+  const setUniverse = useStore(state => state.setUniverse);
 
   const onPress = (item: any, index: number) => {
-    console.log('clicked ==>', index);
+    setUniverse(item, index);
   };
 
   if (isLoading) {
