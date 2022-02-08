@@ -1,4 +1,6 @@
-import React, {FC, memo, useState, useEffect} from 'react';
+import React, {FC, memo, useState, useEffect, useCallback} from 'react';
+import {useFocusEffect} from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/core';
 import {
   Text,
   StyleSheet,
@@ -14,9 +16,14 @@ import FilterActions from '../../components/filters/FilterActions/FilterActions'
 import RadioGroup from '../../components/forms/RadioGroup';
 import {Colors, Spacing, Typography} from '../../constants';
 import useStore, {initialSortValues} from '../../store';
-import {useNavigation} from '@react-navigation/core';
 import {handleCheckOnSortValues} from '../../utils/fighters.utils';
 import {IRadioGroupValues} from '../../proptypes/forms.types';
+
+const initialValues = {
+  rate: 0,
+  sortBy: 'name',
+  sortValues: initialSortValues,
+};
 
 const Filters: FC = () => {
   const [isLoading, setIsloading] = useState(false);
@@ -28,11 +35,7 @@ const Filters: FC = () => {
 
   const {values, handleSubmit, setFieldValue, isSubmitting, resetForm} =
     useFormik({
-      initialValues: {
-        rate: 0,
-        sortBy: 'name',
-        sortValues: initialSortValues,
-      },
+      initialValues,
       onSubmit: items => {
         isSubmitting && setIsloading(true);
         handleFilter(items);
@@ -44,13 +47,14 @@ const Filters: FC = () => {
       },
     });
 
-  useEffect(() => {
-    setFieldValue('rate', rate);
-    setFieldValue('sortBy', sortBy);
-    setFieldValue('sortValues', sortValues);
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [rate, sortBy]);
+  useFocusEffect(
+    useCallback(() => {
+      setFieldValue('rate', rate);
+      setFieldValue('sortBy', sortBy);
+      setFieldValue('sortValues', sortValues);
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [rate, sortBy, sortValues]),
+  );
 
   const onSort = (item: IRadioGroupValues, idx: number) => {
     const newSortValues = handleCheckOnSortValues(values.sortValues, idx);
@@ -72,7 +76,12 @@ const Filters: FC = () => {
         onPress: () => '',
         style: 'cancel',
       },
-      {text: 'Reset', onPress: () => resetForm()},
+      {
+        text: 'Reset',
+        onPress: () => {
+          resetForm();
+        },
+      },
     ]);
   };
 

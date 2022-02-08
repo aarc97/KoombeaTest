@@ -21,6 +21,7 @@ interface StoreState extends State {
   handleFirstTime: (val: boolean) => void;
   setUniverse: (item: IUniverse, index: number) => void;
   handleFilter: (prop: IHandleFilter) => void;
+  resetFilter: () => void;
 }
 
 const initialFilterValues = {
@@ -55,6 +56,13 @@ const useStore = create<StoreState>(set => ({
       ...state,
       filter: {sortBy, rate},
       sortValues,
+    })),
+
+  resetFilter: () =>
+    set(state => ({
+      ...state,
+      sortValues: initialSortValues,
+      filter: initialFilterValues,
     })),
 }));
 
