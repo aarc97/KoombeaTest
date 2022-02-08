@@ -1,34 +1,27 @@
 import React, {FC} from 'react';
-import {Image, TouchableOpacity} from 'react-native';
-import {Icon} from 'react-native-elements';
+import {Image} from 'react-native';
 
 import Walkthrough from 'react-native-onboarding-swiper';
-import {Colors, Spacing} from '../../constants';
+import DoneButton from '../../components/buttons/DoneButton/DoneButton';
+import {Colors} from '../../constants';
 import useOnboarding from '../../hooks/useOnboarding';
-
-const DoneButton: FC = props => {
-  return (
-    <TouchableOpacity
-      {...props}
-      style={{
-        backgroundColor: Colors.WHITE,
-        padding: Spacing.SCALE_12,
-        borderRadius: 100,
-        elevation: 2,
-      }}>
-      <Icon name="check" />
-    </TouchableOpacity>
-  );
-};
+import useStore from '../../store';
 
 const Onboarding: FC = () => {
   const {setItem} = useOnboarding();
+  const handleFirstTime = useStore(state => state.handleFirstTime);
+
+  const UpdateFirstTime = async () => {
+    await setItem(false);
+    handleFirstTime(false);
+  };
+
   return (
     <>
       <Walkthrough
         bottomBarColor={Colors.PRIMARY}
         DoneButtonComponent={DoneButton}
-        onDone={() => setItem(false)}
+        onDone={UpdateFirstTime}
         pages={[
           {
             backgroundColor: Colors.PRIMARY,

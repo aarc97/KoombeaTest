@@ -11,6 +11,11 @@ const useOnboarding = () => {
 
   const updateValue = useCallback(async () => {
     const info = await getItem();
+
+    if (info === null) {
+      return handleFirstTime(true);
+    }
+
     handleFirstTime(!!info);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
