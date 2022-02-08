@@ -46,16 +46,8 @@ const FightersList = () => {
     return <LoadingData label="Updating data..." />;
   }
 
-  if (isLoading) {
-    return <ActivityIndicator size="small" />;
-  }
-
   if (error) {
     return <ConnectionError />;
-  }
-
-  if (isEmpty(data)) {
-    return <EmptyData />;
   }
 
   return (
@@ -66,6 +58,7 @@ const FightersList = () => {
       refreshControl={
         <RefreshControl refreshing={isLoading} onRefresh={onRefresh} />
       }
+      ListEmptyComponent={<EmptyData />}
     />
   );
 };

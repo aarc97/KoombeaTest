@@ -3,7 +3,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
 import Fighters, {Details} from '../../screens/Fighters';
 import Filters from '../../screens/Filters';
-import {Icon} from 'react-native-elements/dist/icons/Icon';
+import {Icon} from 'react-native-elements';
 import {Colors} from '../../constants';
 import {useNavigation} from '@react-navigation/core';
 import {IFighter} from '../../proptypes/fighter.types';
@@ -24,7 +24,7 @@ export type DetailsScreenNavigationProp = RouteProp<
 const Stack = createNativeStackNavigator<MainStackParamList>();
 
 const MainStack = () => {
-  const {navigate} = useNavigation<any>();
+  const {navigate, goBack} = useNavigation<any>();
   const onFilters = () => navigate('Filters');
 
   return (
@@ -44,7 +44,13 @@ const MainStack = () => {
         }}
       />
       <Stack.Screen name="Details" component={Details} />
-      <Stack.Screen name="Filters" component={Filters} />
+      <Stack.Screen
+        options={{
+          headerLeft: props => <BackButton onPress={goBack} {...props} />,
+        }}
+        name="Filters"
+        component={Filters}
+      />
     </Stack.Navigator>
   );
 };
@@ -53,6 +59,17 @@ const FilterButton: FC<any> = props => {
   return (
     <Icon
       name="md-filter-sharp"
+      type="ionicon"
+      color={Colors.WHITE}
+      {...props}
+    />
+  );
+};
+
+const BackButton: FC<any> = props => {
+  return (
+    <Icon
+      name="arrow-back-outline"
       type="ionicon"
       color={Colors.WHITE}
       {...props}
