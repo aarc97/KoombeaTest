@@ -5,6 +5,7 @@ import {IUniverse} from '../proptypes/universe.types';
 interface StoreState extends State {
   universeIndexSelected: number;
   universe: null | IUniverse;
+
   getUniverses: (id: string | null) => void;
   getFightersByUniverse: (item: IUniverse | null) => void;
   setUniverse: (item: IUniverse, index: number) => void;
@@ -14,7 +15,7 @@ interface StoreState extends State {
 
 const initialFilterValues = {
   rate: 0,
-  sort: {key: 'name', name: 'Name', value: 'name'},
+  sortBy: 'name',
 };
 
 const all = {objectID: 'all', name: 'All', description: 'all'};
@@ -22,9 +23,18 @@ const all = {objectID: 'all', name: 'All', description: 'all'};
 const useStore = create(set => ({
   universeIndexSelected: 0,
   universe: all,
-  filter: {rate: 0, sort: {key: 'name', name: 'Name', value: 'name'}},
+  isFirstTime: false,
+  filter: initialFilterValues,
+  handleFirstTime: (val: boolean) => {
+    set(() => ({isFirstTime: val}));
+  },
   setUniverse: (item: IUniverse, index: number) => {
     set(() => ({universeIndexSelected: index, universe: item}));
+  },
+  handleFilter: (filterValues: typeof initialFilterValues) => {
+    set(() => ({
+      filter: filterValues,
+    }));
   },
   resetUniverses: () => {
     return set(() => ({
