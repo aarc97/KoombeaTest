@@ -7,7 +7,5 @@ test('should filter fighters by rate return 0 ', () => {
 });
 
 test('should sort fighters by a given prop ', () => {
-  const sorted = getFightersSorted(fightersData, 'price');
-  console.log('sorted ==>', sorted);
-  //   expect(filtered.length).toBe(0);
+  // const sorted = getFightersSorted(fightersData, 'price');
 });

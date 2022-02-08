@@ -18,7 +18,7 @@ import ConnectionError from '../../../containers/ConnectionError';
 import EmptyData from '../../../containers/EmptyData';
 
 const FightersList = () => {
-  const {navigate} = useNavigation();
+  const {navigate} = useNavigation<any>();
   const {
     data,
     error,
