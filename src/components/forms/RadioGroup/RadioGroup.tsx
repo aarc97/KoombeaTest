@@ -1,7 +1,8 @@
-import React, {FC} from 'react';
-import {View} from 'react-native';
+import React, {useCallback, FC} from 'react';
+import {map} from 'lodash';
+import {ScrollView} from 'react-native';
 import RadioButton from '../RadioButton';
-import SelectionGroup from '../SelectionGroup';
+import {IRadioGroupValues} from '../../../proptypes/forms.types';
 
 interface IRadioGroup {
   values: any[];
@@ -9,15 +10,25 @@ interface IRadioGroup {
 }
 
 const RadioGroup: FC<IRadioGroup> = ({values, onPress}) => {
-  return (
-    <View>
-      <SelectionGroup
-        values={values}
-        CustomComponent={RadioButton}
-        onPress={onPress}
-      />
-    </View>
+  const renderItem = useCallback(
+    (item: IRadioGroupValues, idx: number) => {
+      const onPressed = () => {
+        onPress(item, idx);
+      };
+
+      return (
+        <RadioButton
+          key={`${idx}`}
+          isSelected={item.checked}
+          item={item}
+          onPress={onPressed}
+        />
+      );
+    },
+    [onPress],
   );
+
+  return <ScrollView>{map(values || [], renderItem)}</ScrollView>;
 };
 
 export default RadioGroup;

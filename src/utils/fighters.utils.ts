@@ -1,7 +1,8 @@
-import {filter, sortBy, toLower} from 'lodash';
+import {filter, findIndex, sortBy, toLower} from 'lodash';
 import {Label} from '../constants';
 import {FIGHTERS_API} from '../constants/api.constants';
 import {IFighter, IGetFightersFormatted} from '../proptypes/fighter.types';
+import {IRadioGroupValues} from '../proptypes/forms.types';
 
 const getFightersByRate = (arr: IFighter[], rate: number) => {
   return filter(arr, itemVals => itemVals.rate === rate);
@@ -29,9 +30,22 @@ const getFightersFormatted = ({data, rate, sort}: IGetFightersFormatted) => {
   return getFightersSorted(filtered, sort);
 };
 
+const handleCheckOnSortValues = (
+  data: IRadioGroupValues[],
+  idx: number,
+): IRadioGroupValues[] => {
+  let arr = [...data];
+  let previewIndexSelected = findIndex(data, e => e.checked === true);
+  arr[previewIndexSelected].checked = false;
+  arr[idx].checked = true;
+
+  return arr;
+};
+
 export {
   getFightersByRate,
   getFightersSorted,
   getFightersDynamicApi,
   getFightersFormatted,
+  handleCheckOnSortValues,
 };

@@ -13,8 +13,9 @@ import {useFormik} from 'formik';
 import FilterActions from '../../components/filters/FilterActions/FilterActions';
 import RadioGroup from '../../components/forms/RadioGroup';
 import {Colors, Spacing, Typography} from '../../constants';
-import useStore from '../../store';
+import useStore, {initialSortValues} from '../../store';
 import {useNavigation} from '@react-navigation/core';
+import {handleCheckOnSortValues} from '../../utils/fighters.utils';
 
 interface IRadioGroupValues {
   key: string;
@@ -22,26 +23,20 @@ interface IRadioGroupValues {
   value: string;
 }
 
-const radioGroupValues: IRadioGroupValues[] = [
-  {key: 'name', name: 'Name', value: 'name'},
-  {key: 'price', name: 'Price', value: 'price'},
-  {key: 'rate', name: 'Rate', value: 'rate'},
-  {key: 'downloads', name: 'Downloads', value: 'downloads'},
-];
-
 const Filters: FC = () => {
   const [isLoading, setIsloading] = useState(false);
   const {goBack} = useNavigation();
   const handleFilter = useStore(state => state.handleFilter);
+
   const {rate, sortBy} = useStore(state => state.filter);
+  const sortValues = useStore(state => state.sortValues);
 
   const {values, handleSubmit, setFieldValue, isSubmitting, resetForm} =
     useFormik({
       initialValues: {
         rate: 0,
-        initialRadioIndex: 0,
         sortBy: 'name',
-        radioGroupValues,
+        sortValues: initialSortValues,
       },
       onSubmit: items => {
         isSubmitting && setIsloading(true);
@@ -57,11 +52,15 @@ const Filters: FC = () => {
   useEffect(() => {
     setFieldValue('rate', rate);
     setFieldValue('sortBy', sortBy);
+    setFieldValue('sortValues', sortValues);
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [rate, sortBy]);
 
-  const onSort = (item: IRadioGroupValues) => {
+  const onSort = (item: IRadioGroupValues, idx: number) => {
+    const newSortValues = handleCheckOnSortValues(values.sortValues, idx);
     setFieldValue('sortBy', item.value);
+    setFieldValue('sortValues', newSortValues);
   };
 
   const onFinishRating = (pCount: number) => {
@@ -86,7 +85,7 @@ const Filters: FC = () => {
     <Container>
       <Main>
         <Group header="Sort by">
-          <RadioGroup values={values.radioGroupValues} onPress={onSort} />
+          <RadioGroup values={values.sortValues} onPress={onSort} />
         </Group>
         <Group header="Filter" style={styles.rating}>
           <AirbnbRating
