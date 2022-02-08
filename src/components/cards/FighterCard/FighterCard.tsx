@@ -1,4 +1,4 @@
-import React, {FC} from 'react';
+import React, {FC, memo} from 'react';
 import FastImage from 'react-native-fast-image';
 
 import {
@@ -40,4 +40,4 @@ const FighterCard: FC<IFighterCard> = ({item, onPress, ...rest}) => {
   );
 };
 
-export default FighterCard;
+export default memo(FighterCard);
