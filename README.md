@@ -12,7 +12,7 @@ android: npx react-native run-android
 ios: npx react-native run-ios
 ```
 
-## Main thirth party libraries used
+## Main third party libraries used
 - Formik
 - styled-components
 - react-native-async-storage/async-storage
