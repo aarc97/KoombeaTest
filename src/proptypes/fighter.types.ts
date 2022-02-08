@@ -16,6 +16,12 @@ interface IFighterCard {
   onPress: () => void;
 }
 
+interface IGetFightersFormatted {
+  data: IFighter[];
+  rate: number;
+  sort: string;
+}
+
 type TFighters = IFighter[];
 
-export type {IFighter, TFighters, IFighterCard};
+export type {IFighter, TFighters, IGetFightersFormatted, IFighterCard};

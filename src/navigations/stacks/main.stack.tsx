@@ -25,7 +25,6 @@ const Stack = createNativeStackNavigator<MainStackParamList>();
 
 const MainStack = () => {
   const {navigate} = useNavigation<any>();
-
   const onFilters = () => navigate('Filters');
 
   return (

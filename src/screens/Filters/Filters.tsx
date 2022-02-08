@@ -14,6 +14,7 @@ import FilterActions from '../../components/filters/FilterActions/FilterActions'
 import RadioGroup from '../../components/forms/RadioGroup';
 import {Colors, Spacing, Typography} from '../../constants';
 import useStore from '../../store';
+import {useNavigation} from '@react-navigation/core';
 
 interface IRadioGroupValues {
   key: string;
@@ -30,6 +31,7 @@ const radioGroupValues: IRadioGroupValues[] = [
 
 const Filters: FC = () => {
   const [isLoading, setIsloading] = useState(false);
+  const {goBack} = useNavigation();
   const handleFilter = useStore(state => state.handleFilter);
   const {rate, sortBy} = useStore(state => state.filter);
 
@@ -45,7 +47,10 @@ const Filters: FC = () => {
         isSubmitting && setIsloading(true);
         handleFilter(items);
 
-        setTimeout(() => setIsloading(false), 1000);
+        setTimeout(() => {
+          setIsloading(false);
+          goBack();
+        }, 1000);
       },
     });
 
@@ -127,6 +132,7 @@ const Main = styled.View`
 `;
 
 const Container = Main;
+
 const Header = styled(Text)`
   color: ${Colors.GRAY};
   font-family: ${Typography.FONT_MEDIUM.fontFamily};

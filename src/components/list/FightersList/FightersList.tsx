@@ -1,15 +1,31 @@
+import React, {useCallback} from 'react';
 import {useNavigation} from '@react-navigation/core';
 import {isEmpty} from 'lodash';
-import React, {useCallback} from 'react';
-import {ActivityIndicator, FlatList, ListRenderItemInfo} from 'react-native';
-import {Text} from 'react-native-elements';
+import {
+  ActivityIndicator,
+  FlatList,
+  ListRenderItemInfo,
+  RefreshControl,
+} from 'react-native';
+
 import useFighters from '../../../hooks/useFighters';
 import {IFighter} from '../../../proptypes/fighter.types';
 import {FighterCard} from '../../cards';
+import {mutate} from 'swr';
+import {UNIVERSE_API} from '../../../constants/api.constants';
+import LoadingData from '../../../containers/LoadingData';
+import ConnectionError from '../../../containers/ConnectionError';
+import EmptyData from '../../../containers/EmptyData';
 
 const FightersList = () => {
   const {navigate} = useNavigation();
-  const {data, error, isLoading} = useFighters();
+  const {
+    data,
+    error,
+    isLoading,
+    isValidating,
+    mutate: mutateFighters,
+  } = useFighters();
 
   const renderItem = useCallback(({item}: ListRenderItemInfo<IFighter>) => {
     const handleNavigation = () => navigate('Details', {details: item});
@@ -21,20 +37,36 @@ const FightersList = () => {
 
   const keyExtractor = (props: any) => `${props.objectID}${props.name}`;
 
+  const onRefresh = async () => {
+    await mutate(UNIVERSE_API);
+    mutateFighters();
+  };
+
+  if (isValidating) {
+    return <LoadingData label="Updating data..." />;
+  }
+
   if (isLoading) {
     return <ActivityIndicator size="small" />;
   }
 
   if (error) {
-    return <Text>Sorry, connection error</Text>;
+    return <ConnectionError />;
   }
 
   if (isEmpty(data)) {
-    return <Text>No values found</Text>;
+    return <EmptyData />;
   }
 
   return (
-    <FlatList data={data} renderItem={renderItem} keyExtractor={keyExtractor} />
+    <FlatList
+      data={data}
+      renderItem={renderItem}
+      keyExtractor={keyExtractor}
+      refreshControl={
+        <RefreshControl refreshing={isLoading} onRefresh={onRefresh} />
+      }
+    />
   );
 };
 

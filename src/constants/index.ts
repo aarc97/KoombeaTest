@@ -7,7 +7,10 @@ import * as routes from './routes.constants';
 import {Platform} from 'react-native';
 
 const IS_ANDROID = Platform.OS === 'android';
+const Label = {
+  ALL: 'all',
+};
 
 const {Routes} = routes;
 
-export {Api, Colors, Mixins, Spacing, Typography, Routes, IS_ANDROID};
+export {Api, Colors, Mixins, Spacing, Typography, Routes, Label, IS_ANDROID};
