@@ -1,7 +1,17 @@
+
+
 # KoombeaTest
 App test to applying for a job in Koombea
 
 # Hi, Koombea! this is my repo for the test
+
+⚠️ **NOTE**: I added a branch called "improvement" where i fixed some bugs detected after. 
+    - Bug fixed: 
+      Reset action not working as expected: Unsaved filters remain even after exiting the Filters screen.
+    - Improvement
+    Filter screen refactored for better clean and readable code
+    Improvements in header buttons, adapting buttons to dark background
+    Adapting Status bar to dark background 
 
 ## Installation
 
