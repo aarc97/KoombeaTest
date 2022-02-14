@@ -4,10 +4,11 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Fighters, {Details} from '../../screens/Fighters';
 import Filters from '../../screens/Filters';
 import {Icon} from 'react-native-elements';
-import {Colors} from '../../constants';
+import {Colors, IS_ANDROID, Spacing} from '../../constants';
 import {useNavigation} from '@react-navigation/core';
 import {IFighter} from '../../proptypes/fighter.types';
 import type {RouteProp} from '@react-navigation/native';
+import {StyleSheet} from 'react-native';
 
 type MainStackParamList = {
   Filters: undefined;
@@ -38,17 +39,21 @@ const MainStack = () => {
         name="Fighters"
         component={Fighters}
         options={{
-          headerRight: hProps => (
-            <FilterButton onPress={onFilters} {...hProps} />
-          ),
+          headerRight: props => <FilterButton onPress={onFilters} {...props} />,
         }}
       />
-      <Stack.Screen name="Details" component={Details} />
       <Stack.Screen
+        name="Details"
         options={{
           headerLeft: props => <BackButton onPress={goBack} {...props} />,
         }}
+        component={Details}
+      />
+      <Stack.Screen
         name="Filters"
+        options={{
+          headerLeft: props => <BackButton onPress={goBack} {...props} />,
+        }}
         component={Filters}
       />
     </Stack.Navigator>
@@ -72,9 +77,16 @@ const BackButton: FC<any> = props => {
       name="arrow-back-outline"
       type="ionicon"
       color={Colors.WHITE}
+      containerStyle={[styles.backContainer, props.containerStyle]}
       {...props}
     />
   );
 };
+
+const styles = StyleSheet.create({
+  backContainer: {
+    marginRight: IS_ANDROID ? Spacing.SCALE_12 : 0,
+  },
+});
 
 export default MainStack;

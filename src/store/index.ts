@@ -1,4 +1,6 @@
 import create, {State} from 'zustand';
+import {immer} from './middlewares.store';
+
 import {IUniverse} from '../proptypes/universe.types';
 import {IRadioGroupValues} from '../proptypes/forms.types';
 
@@ -38,32 +40,34 @@ export const initialSortValues: IRadioGroupValues[] = [
   {key: 'downloads', name: 'Downloads', value: 'downloads', checked: false},
 ];
 
-const useStore = create<StoreState>(set => ({
-  universeIndexSelected: 0,
-  universe: all,
-  isFirstTime: false,
-  sortValues: initialSortValues,
-  filter: initialFilterValues,
+const useStore = create<StoreState>(
+  immer(set => ({
+    universeIndexSelected: 0,
+    universe: all,
+    isFirstTime: false,
+    sortValues: initialSortValues,
+    filter: initialFilterValues,
+    handleFirstTime: (val: boolean) => set(state => (state.isFirstTime = val)),
 
-  handleFirstTime: (val: boolean) =>
-    set(state => ({...state, isFirstTime: val})),
+    setUniverse: (item: IUniverse, index: number) =>
+      set(state => {
+        state.universeIndexSelected = index;
+        state.universe = item;
+      }),
 
-  setUniverse: (item: IUniverse, index: number) =>
-    set(state => ({...state, universeIndexSelected: index, universe: item})),
+    handleFilter: ({sortBy, rate, sortValues}: IHandleFilter) => {
+      set(state => {
+        state.filter = {sortBy, rate};
+        state.sortValues = sortValues;
+      });
+    },
 
-  handleFilter: ({sortBy, rate, sortValues}: IHandleFilter) =>
-    set(state => ({
-      ...state,
-      filter: {sortBy, rate},
-      sortValues,
-    })),
-
-  resetFilter: () =>
-    set(state => ({
-      ...state,
-      sortValues: initialSortValues,
-      filter: initialFilterValues,
-    })),
-}));
+    resetFilter: () =>
+      set(state => {
+        state.sortValues = initialSortValues;
+        state.filter = initialFilterValues;
+      }),
+  })),
+);
 
 export default useStore;

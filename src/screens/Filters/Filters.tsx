@@ -1,73 +1,88 @@
-import React, {FC, memo, useState, useEffect, useCallback} from 'react';
-import {useFocusEffect} from '@react-navigation/native';
-import {useNavigation} from '@react-navigation/core';
-import {
-  Text,
-  StyleSheet,
-  ViewStyle,
-  ActivityIndicator,
-  Alert,
-} from 'react-native';
-import {AirbnbRating} from 'react-native-elements';
-import styled from 'styled-components/native';
+import React, {FC, useState, useEffect, useCallback} from 'react';
+
+import {Alert} from 'react-native';
 import {useFormik} from 'formik';
 
-import FilterActions from '../../components/filters/FilterActions/FilterActions';
-import RadioGroup from '../../components/forms/RadioGroup';
-import {Colors, Spacing, Typography} from '../../constants';
-import useStore, {initialSortValues} from '../../store';
-import {handleCheckOnSortValues} from '../../utils/fighters.utils';
+import useStore from '../../store';
 import {IRadioGroupValues} from '../../proptypes/forms.types';
-
-const initialValues = {
-  rate: 0,
-  sortBy: 'name',
-  sortValues: initialSortValues,
-};
+import usePreventingGoingBack from '../../hooks/usePreventingGoingBack';
+import FilterForm from '../../components/filters/FilterForm';
+import {findIndex} from 'lodash';
 
 const Filters: FC = () => {
+  const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false);
   const [isLoading, setIsloading] = useState(false);
-  const {goBack} = useNavigation();
+  const {rate, sortBy} = useStore(state => state.filter);
   const handleFilter = useStore(state => state.handleFilter);
 
-  const {rate, sortBy} = useStore(state => state.filter);
-  const sortValues = useStore(state => state.sortValues);
+  // const {goBack} = useNavigation();
+  usePreventingGoingBack(hasUnsavedChanges);
 
-  const {values, handleSubmit, setFieldValue, isSubmitting, resetForm} =
-    useFormik({
-      initialValues,
-      onSubmit: items => {
-        isSubmitting && setIsloading(true);
-        handleFilter(items);
+  const form = useFormik({
+    initialValues: {
+      rate: 0,
+      sortBy: 'name',
+      sortValues: [
+        {key: 'name', name: 'Name', value: 'name', checked: true},
+        {key: 'price', name: 'Price', value: 'price', checked: false},
+        {key: 'rate', name: 'Rate', value: 'rate', checked: false},
+        {
+          key: 'downloads',
+          name: 'Downloads',
+          value: 'downloads',
+          checked: false,
+        },
+      ],
+    },
+    onSubmit: items => {
+      isSubmitting && setIsloading(true);
+      handleFilter(items);
+      setHasUnsavedChanges(false);
 
-        setTimeout(() => {
-          setIsloading(false);
-          goBack();
-        }, 1000);
-      },
+      setTimeout(() => {
+        setIsloading(false);
+        // goBack();
+      }, 1000);
+    },
+  });
+
+  const {values, setFieldValue, isSubmitting} = form;
+
+  useEffect(() => {
+    const sortValues = useStore.getState().sortValues;
+    setFieldValue('rate', rate);
+    setFieldValue('sortBy', sortBy);
+
+    sortValues.map((props, index) => {
+      setFieldValue(`sortValues[${index}]`, props);
     });
+  }, [rate, sortBy, setFieldValue]);
 
-  useFocusEffect(
-    useCallback(() => {
-      setFieldValue('rate', rate);
-      setFieldValue('sortBy', sortBy);
-      setFieldValue('sortValues', sortValues);
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [rate, sortBy, sortValues]),
+  const onSort = useCallback(
+    (item: IRadioGroupValues, idx: number) => {
+      const sortValyesCopy = [...values.sortValues];
+      const prevIndex = findIndex(sortValyesCopy, e => e.checked === true);
+
+      setFieldValue('sortBy', item.value);
+      setFieldValue(`sortValues[${prevIndex}].checked`, false);
+      setFieldValue(`sortValues[${idx}].checked`, true);
+      setHasUnsavedChanges(true);
+    },
+    [values.sortValues, setFieldValue],
   );
 
-  const onSort = (item: IRadioGroupValues, idx: number) => {
-    const newSortValues = handleCheckOnSortValues(values.sortValues, idx);
-    setFieldValue('sortBy', item.value);
-    setFieldValue('sortValues', newSortValues);
-  };
+  const onFinishRating = useCallback(
+    (count: number) => {
+      if (count === values.rate) {
+        return null;
+      }
 
-  const onFinishRating = (pCount: number) => {
-    if (pCount === values.rate) {
-      return null;
-    }
-    setFieldValue('rate', pCount);
-  };
+      setFieldValue('rate', count);
+      setHasUnsavedChanges(true);
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [values.rate],
+  );
 
   const onReset = () => {
     Alert.alert('Alert dialog', 'Are you sure you want to reset the filter', [
@@ -79,72 +94,29 @@ const Filters: FC = () => {
       {
         text: 'Reset',
         onPress: () => {
-          resetForm();
+          const sortsValuesCopy = [...values.sortValues];
+          sortsValuesCopy.map((_, index) => {
+            if (index === 0) {
+              return setFieldValue(`sortValues[${index}].checked`, true);
+            }
+            return setFieldValue(`sortValues[${index}].checked`, false);
+          });
+          setFieldValue('rate', 0);
+          setFieldValue('sortBy', 'name');
         },
       },
     ]);
   };
 
   return (
-    <Container>
-      <Main>
-        <Group header="Sort by">
-          <RadioGroup values={values.sortValues} onPress={onSort} />
-        </Group>
-        <Group header="Filter" style={styles.rating}>
-          <AirbnbRating
-            showRating={false}
-            count={5}
-            defaultRating={values.rate}
-            onFinishRating={onFinishRating}
-          />
-        </Group>
-      </Main>
-      {isLoading ? <ActivityIndicator size="large" /> : null}
-
-      <FilterActions onApply={handleSubmit} onReset={onReset} />
-    </Container>
+    <FilterForm
+      form={form}
+      isLoading={isLoading}
+      onSort={onSort}
+      onReset={onReset}
+      onRating={onFinishRating}
+    />
   );
 };
 
 export default Filters;
-
-interface IGroup {
-  children: React.ReactNode;
-  header: string;
-  style?: ViewStyle;
-}
-
-const Group: FC<IGroup> = memo(({children, header = '', style, ...rest}) => {
-  return (
-    <GroupContainer style={style} {...rest}>
-      <Header>{header}</Header>
-      {children}
-    </GroupContainer>
-  );
-});
-
-const GroupContainer = styled.View`
-  padding: ${Spacing.SCALE_16}px;
-  background-color: ${Colors.WHITE};
-  elevation: 2;
-`;
-
-const Main = styled.View`
-  flex: 1;
-`;
-
-const Container = Main;
-
-const Header = styled(Text)`
-  color: ${Colors.GRAY};
-  font-family: ${Typography.FONT_MEDIUM.fontFamily};
-  margin-bottom: ${Spacing.SCALE_12}px;
-`;
-
-const styles = StyleSheet.create({
-  rating: {
-    marginTop: Spacing.SCALE_16,
-    paddingBottom: Spacing.SCALE_32,
-  },
-});

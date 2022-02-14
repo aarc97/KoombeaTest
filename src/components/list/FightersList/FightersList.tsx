@@ -1,17 +1,16 @@
 import React, {useCallback} from 'react';
 import {useNavigation} from '@react-navigation/core';
-import {isEmpty} from 'lodash';
 import {
-  ActivityIndicator,
   FlatList,
   ListRenderItemInfo,
   RefreshControl,
+  StyleSheet,
 } from 'react-native';
+import {mutate} from 'swr';
 
 import useFighters from '../../../hooks/useFighters';
 import {IFighter} from '../../../proptypes/fighter.types';
 import {FighterCard} from '../../cards';
-import {mutate} from 'swr';
 import {UNIVERSE_API} from '../../../constants/api.constants';
 import LoadingData from '../../../containers/LoadingData';
 import ConnectionError from '../../../containers/ConnectionError';
@@ -27,13 +26,20 @@ const FightersList = () => {
     mutate: mutateFighters,
   } = useFighters();
 
-  const renderItem = useCallback(({item}: ListRenderItemInfo<IFighter>) => {
-    const handleNavigation = () => navigate('Details', {details: item});
-    return (
-      <FighterCard key={item.objectID} item={item} onPress={handleNavigation} />
-    );
+  const handleNavigation = useCallback((item: IFighter) => {
+    navigate('Details', {details: item});
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  const renderItem = ({item}: ListRenderItemInfo<IFighter>) => {
+    return (
+      <FighterCard
+        key={item.objectID}
+        item={item}
+        onPress={() => handleNavigation(item)}
+      />
+    );
+  };
 
   const keyExtractor = (props: any) => `${props.objectID}${props.name}`;
 
@@ -59,8 +65,15 @@ const FightersList = () => {
         <RefreshControl refreshing={isLoading} onRefresh={onRefresh} />
       }
       ListEmptyComponent={<EmptyData />}
+      contentContainerStyle={styles.list}
     />
   );
 };
 
 export default FightersList;
+
+const styles = StyleSheet.create({
+  list: {
+    flexGrow: 1,
+  },
+});

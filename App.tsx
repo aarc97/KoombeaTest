@@ -25,7 +25,7 @@ const App = () => {
   return (
     <ThemeProvider theme={customTheme}>
       <SafeAreaProvider>
-        <StatusBar />
+        <StatusBar barStyle="light-content" />
         <AppNavigator />
       </SafeAreaProvider>
     </ThemeProvider>

@@ -46,9 +46,18 @@ const Quantity: FC<NumberFormatProps> = memo(({value = '0', ...rest}) => {
   );
 });
 
-const Price: FC<NumberFormatProps> = memo(({value = '0', ...rest}) => {
-  return <NumberFormat value={value} RenderComponent={PriceText} {...rest} />;
-});
+const Price: FC<NumberFormatProps> = memo(
+  ({value = '0', prefix = '$', ...rest}) => {
+    return (
+      <NumberFormat
+        prefix={prefix}
+        value={value}
+        RenderComponent={PriceText}
+        {...rest}
+      />
+    );
+  },
+);
 
 const Container = styled.View`
   flex-direction: row;

@@ -30,13 +30,12 @@ const getFightersFormatted = ({data, rate, sort}: IGetFightersFormatted) => {
   return getFightersSorted(filtered, sort);
 };
 
-const handleCheckOnSortValues = (
-  data: IRadioGroupValues[],
-  idx: number,
-): IRadioGroupValues[] => {
-  let arr = [...data];
-  let previewIndexSelected = findIndex(data, e => e.checked === true);
-  arr[previewIndexSelected].checked = false;
+const handleCheckOnSortValues = (data: IRadioGroupValues[], idx: number) => {
+  // Clone;
+  const arr = data.slice();
+
+  const prevIndex = findIndex(arr, e => e.checked === true);
+  arr[prevIndex].checked = false;
   arr[idx].checked = true;
 
   return arr;
